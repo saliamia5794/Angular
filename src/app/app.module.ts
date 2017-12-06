@@ -13,13 +13,16 @@ import { JobAddFormComponent } from './job-add-form/job-add-form.component';
 import { DaysAgoPipe } from './pipes/days-ago.pipe';
 import { HomeComponent } from './home/home.component';
 import { JobDetailsComponent } from './job-details/job-details.component';
+import { AboutComponent } from './about/about.component';
 
 
 
 const routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
+  {path: 'jobs/add', component: JobAddFormComponent},
   {path: 'jobs/:id', component: JobDetailsComponent},
-  {path: 'jobs', component: JobListComponent}
+  {path: 'jobs', component: JobListComponent},
+  {path: 'about', component: AboutComponent}
 ];
 
 @NgModule({
@@ -30,7 +33,8 @@ const routes = [
     JobAddFormComponent,
     DaysAgoPipe,
     HomeComponent,
-    JobDetailsComponent
+    JobDetailsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
