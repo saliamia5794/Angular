@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpModule} from '@angular/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import { RouterModule} from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
@@ -11,7 +11,16 @@ import {JobService} from './services/job.service';
 import { JobAddFormComponent } from './job-add-form/job-add-form.component';
 
 import { DaysAgoPipe } from './pipes/days-ago.pipe';
+import { HomeComponent } from './home/home.component';
+import { JobDetailsComponent } from './job-details/job-details.component';
 
+
+
+const routes = [
+  {path: '', component: HomeComponent, pathMatch: 'full'},
+  {path: 'jobs/:id', component: JobDetailsComponent},
+  {path: 'jobs', component: JobListComponent}
+];
 
 @NgModule({
   declarations: [
@@ -19,13 +28,16 @@ import { DaysAgoPipe } from './pipes/days-ago.pipe';
     SearchComponent,
     JobListComponent,
     JobAddFormComponent,
-    DaysAgoPipe
+    DaysAgoPipe,
+    HomeComponent,
+    JobDetailsComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [JobService],
   bootstrap: [AppComponent]
