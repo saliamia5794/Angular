@@ -10,13 +10,16 @@ import { JobListComponent } from './job-list/job-list.component';
 import {JobService} from './services/job.service';
 import { JobAddFormComponent } from './job-add-form/job-add-form.component';
 
+import { DaysAgoPipe } from './pipes/days-ago.pipe';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
     JobListComponent,
-    JobAddFormComponent
+    JobAddFormComponent,
+    DaysAgoPipe
   ],
   imports: [
     BrowserModule,
