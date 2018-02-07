@@ -4,18 +4,18 @@ import 'rxjs/add/operator/map';
 import { Subject } from 'rxjs/Subject'; // c'est un object qui est a la fois un  observer et observable
 import 'rxjs/add/operator/do';
 import {Observable } from 'rxjs/Observable';
-import "rxjs/add/observable/of";
+import 'rxjs/add/observable/of';
 
 
 @Injectable()
 export class JobService {
 
   initialJobs = [];
-  jobs = [];//tableau qui permet dajouter nos propre job
+  jobs = []; //tableau qui permet dajouter nos propre job
   jobsSubject = new Subject(); // nouvelle instance de Subject appelé jobsSubject
-
+  BASE_URL = 'http://localhost:4201/';
   constructor(private http: Http) { }
-
+/*
   getJobs() {
     //on a à la fois des données de jobs.json+des données ajoutées par notre formulaire
     if (this.jobs.length && this.initialJobs.length > 0) {
@@ -33,12 +33,19 @@ export class JobService {
 
     } else {
       console.log('case else');
-      return this.http.get('data/jobs.json')
+      return this.http.get(this.BASE_URL + 'api/jobs')
         .map(res => res.json())
         .do(data => this.initialJobs = data);
 
     }
 
+  } */
+
+
+
+  getJobs() {
+    return this.http.get(this.BASE_URL + 'api/jobs')
+                     .map(res => res.json());
   }
 
   /*
@@ -48,9 +55,16 @@ export class JobService {
    peut faire communiquer des component qui sont au meme niveau
   */
   addJob(jobData) {
+    console.log('inside addjob');
     jobData.id = Date.now(); // creer un id unique
-    this.jobs = [jobData, ...this.jobs]; // permet la mise a jour des offres
-    return this.jobsSubject.next(jobData);
+    //this.jobs = [jobData, ...this.jobs]; // permet la mise a jour des offres
+   // return this.jobsSubject.next(jobData);
+   return this.http.post(this.BASE_URL + 'api/jobs', jobData)
+                    .map( res => {
+                          console.log(res);
+                          this.jobsSubject.next(jobData);
+
+                          });
 
   }
   //on a des jobs a récupéré du jobs.json
