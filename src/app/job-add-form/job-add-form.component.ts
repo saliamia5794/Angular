@@ -72,5 +72,6 @@ export class JobAddFormComponent implements OnInit {
   createJob(jobData) {
     console.log(this.form.value);
     this.jobService.addJob(jobData).subscribe();
+    this.form.reset(); // clear the form after posting data
   }
 }

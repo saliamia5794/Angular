@@ -9,7 +9,7 @@ import 'rxjs/add/observable/of';
 
 @Injectable()
 export class JobService {
-
+   //salim = {};
   initialJobs = [];
   jobs = []; //tableau qui permet dajouter nos propre job
   jobsSubject = new Subject(); // nouvelle instance de Subject appelé jobsSubject
